@@ -1,0 +1,400 @@
+package GUI;
+
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.Random;
+
+import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
+
+
+public class GUI implements ActionListener{
+	int credit = 5;
+	int point = 0;
+	int r = 0;
+
+	JFrame rock = new JFrame();
+	JFrame paper = new JFrame();
+	JFrame scissor = new JFrame();
+	public GUI() {
+
+		JFrame frame = new JFrame();
+		frame.setLocation(622,193);
+		JLabel welcome = new JLabel("Welcome!", SwingConstants.CENTER);
+		JLabel credits = new JLabel("Credits: " + credit, SwingConstants.CENTER);
+		JLabel blank = new JLabel("", SwingConstants.CENTER);
+		JLabel click = new JLabel("Please click to begin playing\n", SwingConstants.CENTER);
+		JButton game = new JButton("Begin Playing");
+		game.setActionCommand("game");
+		game.addActionListener(this);
+
+		JButton exit = new JButton ("Exit");
+		exit.setActionCommand("exit");
+		exit.addActionListener(this);
+
+
+		JPanel panel = new JPanel();
+		panel.setBorder(BorderFactory.createEmptyBorder(250,250,250,250));
+		panel.setLayout(new GridLayout(0,1));
+		panel.add(welcome);
+		panel.add(credits);
+		panel.add(blank);
+		panel.add(click);
+		panel.add(blank);
+		panel.add(game);
+		panel.add(exit);
+		panel.add(blank);
+
+
+		frame.add(panel, BorderLayout.CENTER);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setTitle("Main Menu");
+		frame.pack();
+		frame.setVisible(true);
+
+
+	}
+	ActionListener actionListener = new ActionListener() {
+		public void actionPerformed(ActionEvent actionEvent) {
+
+		}
+	};
+
+	public static void main(String[] args) {
+		// Serena De Stefano
+		// ICS 4U1
+
+		new GUI();
+	}
+	public void game() {
+
+
+
+		Random rand = new Random();
+		int rando = 0;
+		String o = "";
+
+		JFrame rps = new JFrame();
+		rps.setLocation(555,240);
+		rps.setSize(810, 600);
+
+		JPanel panel = new JPanel();
+		panel.setBorder(BorderFactory.createEmptyBorder(200,200,200,200));
+		panel.setLayout(new GridLayout(0,1));
+
+		JLabel pick = new JLabel("Pick your choice", SwingConstants.CENTER);
+		JLabel blank = new JLabel("", SwingConstants.CENTER);
+
+		JLabel outcome = new JLabel(o, SwingConstants.CENTER);
+		JLabel credits = new JLabel("You currently have " + credit + " credits", SwingConstants.CENTER);
+
+
+
+
+		JButton rock = new JButton("Rock");
+		rock.setActionCommand("rock");
+		rock.addActionListener(this);
+
+
+		JButton paper = new JButton ("Paper");
+		paper.setActionCommand("paper");
+		paper.addActionListener(this);
+
+
+
+		JButton scissor = new JButton ("Scissors");
+		scissor.addActionListener(this);
+		scissor.setActionCommand("scissor");
+
+		JButton exit = new JButton ("Exit Game");
+		exit.addActionListener(this);
+		exit.setActionCommand("exit");
+
+
+		panel.add(pick);
+		panel.add(blank);
+		panel.add(rock);
+		panel.add(paper);
+		panel.add(scissor);
+		panel.add(blank);
+		panel.add(blank);
+		panel.add(exit);
+
+		rps.add(panel, BorderLayout.CENTER);
+		rps.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		rps.setTitle("Rock Paper Scissors");
+
+		rps.setVisible(true);
+
+		if (r>=1) {
+
+			rps.setVisible(false);
+		}
+		r++;
+
+
+
+	}
+
+	public void rock() {
+
+		Random rand = new Random();
+		int rando = 0;
+		String o = "";
+
+		rock = new JFrame();
+		rock.setSize(736,350);
+		rock.setLocation(592,365);
+		JPanel panel = new JPanel();
+
+		rock.add(panel, BorderLayout.CENTER);
+		rock.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		rock.setTitle("Credits");
+		panel.setBorder(new LineBorder(Color.red));
+		panel.setSize(400, 400);
+		panel.setLayout(new GridLayout(0,1));
+
+
+
+		JLabel blank = new JLabel("", SwingConstants.CENTER);
+		JLabel credits = new JLabel("You have " + (credit-1) + " credits left", SwingConstants.CENTER);
+		JButton play = new JButton("Play Again?");
+		play.setActionCommand("game");
+		play.addActionListener(this);
+
+
+
+
+		rando = rand.nextInt((3 - 1) + 1) + 1;
+
+
+		if (rando==1) { //rock
+			o="Your opponent chose rock. This game ended in a tie. 0 points were lost";
+
+
+		}
+		else if (rando==2) { //paper
+			o="Your opponent chose paper. This game ended in a loss. 1 point was lost";
+
+			point--;
+		}
+		else if (rando==3) { // scissors
+			o="Your opponent chose scissors. This game ended in a victory. 5 points were added to your point total";
+
+			point=point+5;
+		}
+
+		JLabel outcome = new JLabel(o, SwingConstants.CENTER);
+		JLabel points = new JLabel("You now have " + point + " points", SwingConstants.CENTER);
+
+
+
+
+		panel.add(outcome);
+		panel.add(credits);
+		panel.add(play);
+		panel.add(points);
+
+
+
+		rock.setVisible(true);
+		if (credit==0) {
+
+		}
+		else {
+			credit--;
+		}
+
+
+
+	}
+
+	public void paper() {
+
+		paper.setSize(736,350);
+		paper.setLocation(592,365);
+		Random rand = new Random();
+		int rando = 0;
+		String o = "";
+
+		paper.setSize(735,350);
+		JPanel panel = new JPanel();
+
+		paper.add(panel, BorderLayout.CENTER);
+		paper.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		paper.setTitle("Credits");
+		panel.setBorder(new LineBorder(Color.red));
+		panel.setSize(400, 400);
+		panel.setLayout(new GridLayout(0,1));
+
+
+		JLabel blank = new JLabel("", SwingConstants.CENTER);
+		JLabel credits = new JLabel("You have " + (credit-1) + " credits left", SwingConstants.CENTER);
+		JButton play = new JButton("Play Again?");
+		play.setActionCommand("game");
+		play.addActionListener(this);
+
+
+		rando = rand.nextInt((3 - 1) + 1) + 1;
+
+
+		if (rando==1) { //rock
+			o="Your opponent chose rock. This game ended in a victory. 5 points were added to your point total";
+			point=point+5;
+
+
+		}
+
+		else if (rando==2) { //paper
+			o="Your opponent chose paper. This game ended in a tie. 0 points were lost";
+
+		}
+
+		else if (rando==3) { // scissors
+			point--;
+			o="Your opponent chose scissors. This game ended in a loss. 1 point was lost";
+
+		}
+
+		JLabel outcome = new JLabel(o, SwingConstants.CENTER);
+		JLabel points = new JLabel("You now have " + point + " points", SwingConstants.CENTER);
+
+		panel.add(outcome);
+		panel.add(credits);
+		panel.add(play);
+		panel.add(points);
+
+
+
+		paper.setVisible(true);
+		if (credit==0) {
+
+		}
+		else {
+			credit--;
+		}
+
+
+	}
+
+	public void scissor() {
+
+		Random rand = new Random();
+		int rando = 0;
+		String o = "";
+
+		scissor = new JFrame();
+
+		scissor.setSize(736,350);
+		scissor.setLocation(592,365);
+		JPanel panel = new JPanel();
+		panel.setBorder(new LineBorder(Color.red));
+		panel.setSize(200, 200);
+		panel.setLayout(new GridLayout(0,1));
+
+
+
+
+		JLabel blank = new JLabel("", SwingConstants.CENTER);
+
+
+		JLabel credits = new JLabel("You have " + (credit-1) + " credits left", SwingConstants.CENTER);
+		JButton play = new JButton("Play Again?");
+		play.setActionCommand("game");
+		play.addActionListener(this);
+
+
+
+
+		rando = rand.nextInt(3)+ 1;
+
+
+
+		if (rando==1) { //rock
+			o="Your opponent chose rock. This game ended in a loss. 1 point was lost";
+			point--;
+
+
+
+		}
+		else if (rando==2) { //paper
+			o="Your opponent chose paper. This game ended in a victory. 5 points were added to your point total";
+			point=point+5;
+
+
+
+		}
+		else if (rando==3) { // scissors
+			o="Your opponent chose scissors. This game ended in a tie. 0 points were lost";
+
+
+
+
+		}
+
+		JLabel outcome = new JLabel(o, SwingConstants.CENTER);
+		JLabel points = new JLabel("You now have " + point + " points", SwingConstants.CENTER);
+
+		scissor.add(panel, BorderLayout.CENTER);
+		scissor.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		scissor.setTitle("Credits");
+
+		panel.add(outcome);
+		panel.add(credits);
+		panel.add(play);
+		panel.add(points);
+
+		scissor.setVisible(true);
+
+		if (credit==0) {
+
+		}
+		else {
+			credit--;
+		}
+
+	}
+
+	public void exit() {
+		System.exit(0);
+	}
+
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+
+		if (credit<=0) {
+			exit();
+		}
+		else {
+			rock.dispose();
+			paper.dispose();
+			scissor.dispose();
+
+			if (e.getActionCommand().equals("game")) {
+				game();
+			}
+			if (e.getActionCommand().equals("rock")) {
+				rock();
+			}
+			if (e.getActionCommand().equals("paper")) {
+				paper();
+			}
+			if (e.getActionCommand().equals("scissor")) {
+				scissor();
+			}
+			if (e.getActionCommand().equals("exit")) {
+				exit();
+			}
+
+		}
+	}
+}
